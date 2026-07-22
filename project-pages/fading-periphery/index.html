@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-953NSV7QWQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-953NSV7QWQ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fading the Periphery — IEEE VR 2027</title>
+    <meta name="description" content="Fading the Periphery: Peripheral Brightness Rolloff for Cybersickness Mitigation in VR. Kyuewon Kim, Uijong Ju. IEEE TVCG (IEEE VR 2027).">
+
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --bg:      #0A0C12;
+            --surface: #12151E;
+            --line:    #1F2430;
+            --text:    #E7EAF0;
+            --muted:   #8B93A7;
+            --accent:  #7DD3FC;
+            --accent2: #A78BFA;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 19px; }
+
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        ::selection { background: rgba(125, 211, 252, 0.25); }
+
+        .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+        /* ── HERO: 주변부가 어두워지는 비네트 = 논문 컨셉 ── */
+        .hero {
+            position: relative;
+            min-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 96px 28px 72px;
+            background:
+                radial-gradient(ellipse 55% 45% at 50% 42%, rgba(125, 211, 252, 0.13), transparent 70%),
+                radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 255, 255, 0.05), transparent 75%);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 90% 85% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+        }
+
+        .hero > * { position: relative; z-index: 1; }
+
+        .hero-venue {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(125, 211, 252, 0.35);
+            border-radius: 999px;
+            padding: 5px 16px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            max-width: 760px;
+            background: linear-gradient(180deg, #FFFFFF 30%, #A7B2C8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+        }
+
+        .hero-sub {
+            font-size: 1.0rem;
+            color: var(--muted);
+            max-width: 620px;
+            margin-bottom: 30px;
+        }
+
+        .hero-authors { font-size: 0.95rem; margin-bottom: 6px; }
+        .hero-authors a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+        .hero-authors a:hover { color: var(--accent); border-color: var(--accent); }
+
+        .hero-affil { font-size: 0.82rem; color: var(--muted); margin-bottom: 34px; }
+
+        .hero-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 9px 22px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            color: var(--text);
+            background: var(--surface);
+            transition: transform 0.15s, border-color 0.15s, background 0.15s, color 0.15s;
+        }
+
+        .btn:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+
+        .btn-primary {
+            background: linear-gradient(90deg, rgba(125, 211, 252, 0.16), rgba(167, 139, 250, 0.16));
+            border-color: rgba(125, 211, 252, 0.45);
+            color: var(--accent);
+        }
+
+        .scroll-hint {
+            margin-top: 56px;
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            animation: floaty 2.4s ease-in-out infinite;
+        }
+
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0); opacity: 0.55; }
+            50%      { transform: translateY(6px); opacity: 1; }
+        }
+
+        /* ── SECTIONS ── */
+        section { padding: 72px 0; border-top: 1px solid var(--line); }
+
+        .sec-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 26px;
+        }
+
+        .sec-title::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 12px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 75%);
+            box-shadow: 0 0 14px rgba(125, 211, 252, 0.65);
+        }
+
+        .abstract-text { color: #C3CAD9; }
+
+        /* 그림/비디오 placeholder */
+        .media-box {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px dashed #2A3140;
+            background:
+                radial-gradient(ellipse 60% 60% at 50% 50%, rgba(125, 211, 252, 0.05), transparent 75%),
+                var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5A6478;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .media-box.teaser { aspect-ratio: 21 / 9; margin-top: 12px; }
+        .media-box.figure { aspect-ratio: 16 / 8; }
+        .media-box.video  { aspect-ratio: 16 / 9; }
+
+        .media-caption {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .figure-block + .figure-block { margin-top: 44px; }
+
+        /* 비디오 iframe 넣을 때 대비 */
+        .video-frame { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 14px; }
+
+        /* ── BIBTEX ── */
+        .bibtex-box { position: relative; }
+
+        .bibtex-box pre {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 24px 28px;
+            font-size: 0.78rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: #B9C2D4;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--accent);
+            background: rgba(125, 211, 252, 0.10);
+            border: 1px solid rgba(125, 211, 252, 0.35);
+            border-radius: 8px;
+            padding: 4px 12px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .copy-btn:hover { background: rgba(125, 211, 252, 0.2); }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 44px 28px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 1.7rem; }
+            .hero { min-height: 70vh; }
+            section { padding: 56px 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+    <span class="hero-venue">IEEE VR 2027</span>
+    <h1>Fading the Periphery: Peripheral Brightness Rolloff for Cybersickness Mitigation in VR</h1>
+    <p class="hero-authors">
+        <a href="https://kyuewonkim.github.io" target="_blank" rel="noopener">Kyuewon Kim</a> &nbsp;·&nbsp;
+        Uijong Ju
+    </p>
+    <p class="hero-affil">Human-Centered eXtended Reality(HXR) Lab, Kyung Hee University</p>
+    <div class="hero-links">
+        <!-- TODO: 링크가 준비되면 href의 #을 교체하고 style="display:none"을 제거하세요 -->
+        <a href="#" class="btn btn-primary" style="display: none;">📄 Paper</a>
+        <a href="#" class="btn" style="display: none;">DOI</a>
+        <a href="#video" class="btn">🎬 Video</a>
+        <a href="#bibtex" class="btn">BibTeX</a>
+    </div>
+    <div class="scroll-hint">SCROLL ↓</div>
+</header>
+
+<div class="wrap">
+
+    <!-- ── TEASER ── -->
+    <section id="teaser" style="border-top: none; padding-top: 48px;">
+        <img src="../../images/Paper-2.png" alt="Teaser" style="width:100%; border-radius:14px; margin-top:12px;">
+        <p class="media-caption">Peripheral brightness rolloff applied to a VR scene: the center stays bright while the periphery gradually fades.</p>
+    </section>
+
+    <!-- ── ABSTRACT ── -->
+    <section id="abstract">
+        <h2 class="sec-title">Abstract</h2>
+        <!-- TODO: 실제 abstract로 교체해주세요 -->
+        <p class="abstract-text">
+            [논문 abstract를 여기에 넣어주세요. This paper proposes a peripheral brightness
+            rolloff method to mitigate cybersickness in virtual reality, validated through
+            user studies measuring sickness symptoms and task performance.]
+        </p>
+    </section>
+
+    <!-- ── METHOD / RESULTS ── -->
+    <section id="figures">
+        <h2 class="sec-title">Method &amp; Results</h2>
+
+        <div class="figure-block">
+            <!-- TODO: 그림으로 교체 -->
+            <div class="media-box figure">Figure 1</div>
+            <p class="media-caption">[그림 1 설명]</p>
+        </div>
+
+        <div class="figure-block">
+            <div class="media-box figure">Figure 2</div>
+            <p class="media-caption">[그림 2 설명]</p>
+        </div>
+    </section>
+
+    <!-- ── VIDEO ── -->
+    <section id="video">
+        <h2 class="sec-title">Video</h2>
+        <!-- TODO: 유튜브 영상이 준비되면 media-box를 아래로 교체하세요:
+             <iframe class="video-frame" src="https://www.youtube.com/embed/영상ID" title="Video" allowfullscreen></iframe> -->
+        <div class="media-box video">Video — Coming Soon</div>
+    </section>
+
+    <!-- ── BIBTEX ── -->
+    <section id="bibtex">
+        <h2 class="sec-title">BibTeX</h2>
+        <div class="bibtex-box">
+            <button type="button" class="copy-btn" onclick="copyBibtex(this)">Copy</button>
+<pre id="bibtexText">@article{kim2027fading,
+  title   = {Fading the Periphery: Peripheral Brightness Rolloff
+             for Cybersickness Mitigation in VR},
+  author  = {Kim, Kyuewon and Ju, Uijong},
+  journal = {IEEE Transactions on Visualization and Computer Graphics},
+  year    = {2027}
+}</pre>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p><a href="https://kyuewonkim.github.io">Kyuewon Kim</a> · Human-Centered eXtended Reality(HXR) Lab, Kyung Hee University</p>
+</footer>
+
+<script>
+    function copyBibtex(btn) {
+        const text = document.getElementById('bibtexText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+        });
+    }
+</script>
+
+</body>
+</html>

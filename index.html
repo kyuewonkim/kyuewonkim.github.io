@@ -14,475 +14,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kyuewon Kim</title>
 
-    <link rel="icon" href="./images/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-
-    <style>
-        :root {
-            --bg:         #ffffff;
-            --text:       #111111;
-            --muted:      #6B7280;
-            --accent:     #2563EB;
-            --badge-bg:   #EFF6FF;
-            --badge-text: #1D4ED8;
-            --border:     #F3F4F6;
-            --border-mid: #E5E7EB;
-            --surface:    #F9FAFB;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 19px; /* 전체 배율: 키우거나 줄이려면 이 값만 조절 */
-        }
-
-        body {
-            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            font-size: 0.92rem;
-            line-height: 1.75;
-            color: var(--text);
-            background: var(--bg);
-            background-image: radial-gradient(ellipse 90% 360px at 50% -60px, rgba(37, 99, 235, 0.07), transparent);
-            background-repeat: no-repeat;
-        }
-
-        ::selection {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-        }
-
-        /* ── NAV ── */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255,255,255,0.90);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 28px;
-            height: 54px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        nav .logo { height: 26px; }
-
-        nav ul { display: flex; list-style: none; gap: 28px; }
-
-        nav a {
-            text-decoration: none;
-            color: var(--muted);
-            font-size: 0.87rem;
-            font-weight: 500;
-            transition: color 0.15s;
-        }
-
-        nav a:hover { color: var(--accent); }
-
-        /* ── LAYOUT ── */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 28px;
-        }
-
-        section {
-            padding: 64px 0;
-            border-bottom: 1px solid var(--border);
-            scroll-margin-top: 64px;
-        }
-
-        section:last-of-type { border-bottom: none; }
-
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.70rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 36px;
-        }
-
-        .section-label::before {
-            content: '';
-            width: 18px;
-            height: 3px;
-            border-radius: 2px;
-            background: var(--accent);
-        }
-
-        .last-updated {
-            text-align: right;
-            font-size: 0.76rem;
-            color: #9CA3AF;
-            padding-top: 24px;
-        }
-
-        /* ── ABOUT ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 176px 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .about-photo {
-            width: 100%;
-            border-radius: 14px;
-            border: 1px solid var(--border-mid);
-            display: block;
-            box-shadow: 0 12px 28px rgba(17, 24, 39, 0.10);
-        }
-
-        .about-name {
-            font-size: 1.85rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 12px;
-        }
-
-        .about-name::after {
-            content: '';
-            display: block;
-            width: 32px;
-            height: 4px;
-            border-radius: 2px;
-            margin-top: 10px;
-            background: linear-gradient(90deg, var(--accent), #60A5FA);
-        }
-
-        .about-affil {
-            font-size: 0.87rem;
-            color: var(--muted);
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-
-        .about-bio {
-            color: #374151;
-            font-size: 0.92rem;
-            line-height: 1.75;
-            margin-bottom: 24px;
-        }
-
-        .social-links { display: flex; flex-wrap: wrap; gap: 8px; }
-
-        .btn-social {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            color: #374151;
-            font-size: 0.81rem;
-            font-weight: 500;
-            background: var(--surface);
-            border: 1px solid var(--border-mid);
-            padding: 5px 14px;
-            border-radius: 20px;
-            transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
-        }
-
-        .btn-social:hover {
-            background: var(--badge-bg);
-            border-color: #BFDBFE;
-            color: var(--accent);
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(37, 99, 235, 0.10);
-        }
-
-        /* ── NEWS ── */
-        .news-list { display: flex; flex-direction: column; gap: 14px; }
-
-        .news-item {
-            display: grid;
-            grid-template-columns: 110px 1fr;
-            gap: 20px;
-            align-items: baseline;
-        }
-
-        .news-date {
-            font-size: 0.81rem;
-            font-weight: 600;
-            color: var(--badge-text);
-        }
-
-        .news-text {
-            font-size: 0.9rem;
-            color: #374151;
-        }
-
-        /* ── FILTER TABS ── */
-        .filter-tabs {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 36px;
-            flex-wrap: wrap;
-        }
-
-        .filter-tab {
-            font-size: 0.81rem;
-            font-weight: 500;
-            padding: 4px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--border-mid);
-            background: var(--surface);
-            color: var(--muted);
-            cursor: pointer;
-            transition: all 0.15s;
-            font-family: inherit;
-        }
-
-        .filter-tab:hover {
-            border-color: #BFDBFE;
-            color: var(--accent);
-        }
-
-        .filter-tab.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-        }
-
-        /* ── PUB CARD ── */
-        .pub-group-title {
-            font-size: 1.02rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 22px;
-        }
-
-        .pub-group + .pub-group { margin-top: 52px; }
-
-        .pub-list { display: flex; flex-direction: column; gap: 0; }
-
-        .pub-card {
-            display: grid;
-            grid-template-columns: 210px 1fr;
-            gap: 28px;
-            align-items: start;
-            padding: 28px 0;
-            border-bottom: 1px solid var(--border);
-            transition: opacity 0.2s;
-        }
-
-        .pub-card:first-child { padding-top: 0; }
-        .pub-card:last-child { border-bottom: none; padding-bottom: 0; }
-        .pub-card[data-hidden="true"] { display: none; }
-
-        .pub-thumb {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid var(--border-mid);
-            display: block;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .pub-card:hover .pub-thumb {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(17, 24, 39, 0.10);
-        }
-
-        .pub-card:hover .pub-title {
-            color: var(--accent);
-        }
-
-        .pub-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .badge {
-            font-size: 0.71rem;
-            font-weight: 600;
-            padding: 2px 9px;
-            border-radius: 4px;
-        }
-
-        .badge-venue {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-        }
-
-        .badge-year {
-            background: #F3F4F6;
-            color: #374151;
-        }
-
-        .pub-title {
-            font-size: 0.98rem;
-            font-weight: 600;
-            line-height: 1.55;
-            color: var(--text);
-            margin-bottom: 7px;
-            transition: color 0.2s;
-        }
-
-        .pub-authors {
-            font-size: 0.86rem;
-            color: var(--muted);
-            margin-bottom: 12px;
-        }
-
-        .pub-authors strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* Abstract */
-        .abstract-toggle {
-            background: none;
-            border: none;
-            padding: 0;
-            font-size: 0.81rem;
-            font-weight: 500;
-            color: var(--accent);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-family: inherit;
-            transition: opacity 0.15s;
-        }
-
-        .abstract-toggle:hover { opacity: 0.7; }
-
-        .abstract-arrow {
-            display: inline-block;
-            transition: transform 0.2s;
-            line-height: 1;
-        }
-
-        .abstract-toggle.open .abstract-arrow { transform: rotate(90deg); }
-
-        .abstract-body {
-            font-size: 0.87rem;
-            color: #4B5563;
-            line-height: 1.75;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, margin-top 0.2s;
-            margin-top: 0;
-        }
-
-        .abstract-body.open {
-            max-height: 500px;
-            margin-top: 10px;
-        }
-
-        .pub-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 14px;
-        }
-
-        .btn-link {
-            font-size: 0.79rem;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 4px 13px;
-            border-radius: 6px;
-            border: 1px solid var(--border-mid);
-            color: #374151;
-            background: var(--surface);
-            transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
-        }
-
-        .btn-link:hover {
-            background: var(--badge-bg);
-            border-color: #BFDBFE;
-            color: var(--accent);
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(37, 99, 235, 0.10);
-        }
-
-        /* ── EDUCATION ── */
-        .edu-list { display: flex; flex-direction: column; gap: 24px; }
-
-        .edu-item {
-            display: grid;
-            grid-template-columns: 48px 1fr auto;
-            gap: 18px;
-            align-items: center;
-        }
-
-        .edu-logo {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 10px;
-            border: 1px solid var(--border-mid);
-            background: var(--surface);
-            padding: 6px;
-        }
-
-        .edu-title {
-            font-size: 0.93rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .edu-sub {
-            font-size: 0.86rem;
-            color: var(--muted);
-        }
-
-        .edu-period {
-            font-size: 0.81rem;
-            font-weight: 600;
-            color: var(--muted);
-            white-space: nowrap;
-        }
-
-        /* ── FOOTER ── */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 0.77rem;
-            color: #9CA3AF;
-            border-top: 1px solid var(--border);
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 640px) {
-            .about-grid { grid-template-columns: 1fr; gap: 20px; }
-            .about-photo { width: 130px; }
-            .pub-card { grid-template-columns: 1fr; }
-            .news-item { grid-template-columns: 1fr; gap: 2px; }
-            .edu-item { grid-template-columns: 40px 1fr; gap: 14px; }
-            .edu-logo { width: 40px; height: 40px; }
-            .edu-period { grid-column: 2; }
-            .nav-inner { height: auto; padding: 12px 20px; gap: 10px; flex-direction: column; }
-            nav ul { gap: 18px; }
-        }
-    </style>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
 
 <nav>
     <div class="nav-inner">
-        <a href="index.html">
-            <img src="./images/logo.png" alt="Kyuewon Kim" class="logo">
-        </a>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#publications">Publications</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="personal.html">Personal</a></li>
         </ul>
     </div>
 </nav>
@@ -493,7 +37,6 @@
 
     <!-- ABOUT -->
     <section id="about">
-        <p class="section-label">About</p>
         <div class="about-grid">
 
             <img src="./images/profile.jpg" alt="Kyuewon Kim" class="about-photo">
@@ -502,47 +45,32 @@
                 <h1 class="about-name">Kyuewon Kim</h1>
                 <p class="about-affil">
                     Ph.D. Student<br>
-                    HXR Lab · Kyung Hee University
+                    Human-Centered eXtended Reality(HXR) Lab, Kyung Hee University
                 </p>
                 <p class="about-bio">
-                    Human-Centered Extended Reality Lab at Kyung Hee University.
-                    Research interests: XR, HCI, and Digital Therapeutics.
+                    Research interests: XR, HCI, and DTx.
                 </p>
                 <div class="social-links">
-                    <a href="mailto:kyuewonkim@gmail.com" class="btn-social">✉ Email</a>
-                    <!-- TODO: 아래 링크의 #을 실제 주소로 교체해주세요 -->
-                    <a href="#" class="btn-social">Google Scholar</a>
-                    <a href="#" class="btn-social">LinkedIn</a>
-                    <a href="https://github.com/kyuewonkim" class="btn-social">GitHub</a>
-                    <a href="#" class="btn-social">CV</a>
+                    <span class="email-wrap">
+                        <button type="button" class="btn-social" id="emailBtn">Email</button>
+                        <span class="email-pop" id="emailPop">
+                            kyuewonkim@khu.ac.kr
+                            <button type="button" id="emailCopy">Copy</button>
+                        </span>
+                    </span>
+                    <a href="https://scholar.google.com/citations?user=bS_Q-RMAAAAJ" class="btn-social">Google Scholar</a>
+                    <!-- 임시 숨김: style="display:none" 제거하면 다시 표시됨 -->
+                    <a href="https://www.linkedin.com/in/kyuewon-kim-4722513b4/" class="btn-social" style="display: none;">LinkedIn</a>
+                    <a href="https://github.com/kyuewonkim" class="btn-social" style="display: none;">GitHub</a>
+                    <a href="./files/CV_kyuewonkim.pdf" class="btn-social" style="display: none;">CV</a>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- NEWS -->
-    <section id="news">
-        <p class="section-label">News</p>
-        <div class="news-list">
-            <!-- TODO: [Month]를 실제 날짜로 교체해주세요 -->
-            <div class="news-item">
-                <span class="news-date">[Month] 2026</span>
-                <span class="news-text">
-                    Our paper on peripheral brightness reduction for cybersickness mitigation was accepted to IEEE VR 2027 (TVCG).
-                </span>
-            </div>
-            <div class="news-item">
-                <span class="news-date">[Month] 2026</span>
-                <span class="news-text">
-                    Our paper on functional connectivity correlates of visual fatigue was published in <em>Displays</em>.
-                </span>
-            </div>
-        </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education">
+    <!-- EDUCATION (임시 숨김: style="display:none" 제거하면 다시 표시됨) -->
+    <section id="education" style="display: none;">
         <p class="section-label">Education</p>
         <div class="edu-list">
             <!-- TODO: [...] 부분을 실제 정보로 교체하고, images/ 폴더에 학교 로고 파일을 넣어주세요 -->
@@ -578,29 +106,24 @@
         <h3 class="pub-group-title">Papers</h3>
         <div class="pub-list">
 
-            <!-- Paper 1 -->
-            <div class="pub-card" data-year="2026">
+            <!-- Paper 1 (임시 숨김: style="display:none" 제거하면 다시 표시됨) -->
+            <div class="pub-card" data-year="2026" style="display: none;">
                 <img src="./images/Paper-2.png" alt="Paper 1 thumbnail" class="pub-thumb">
                 <div>
                     <div class="pub-badges">
-                        <span class="badge badge-venue">IEEEVR 2027 (TVCG)</span>
+                        <span class="badge badge-venue">Conference</span>
                         <span class="badge badge-year">2026</span>
+                        <!-- TODO: DOI가 나오면 href의 #을 실제 주소로 교체해주세요 -->
+                        <a href="#" class="btn-link btn-link-sm">DOI</a>
+                        <a href="./project-pages/fading-periphery/index.html" class="btn-link btn-link-sm">Project Page</a>
                     </div>
                     <h2 class="pub-title">
-                        Peripheral Brightness Reduction for Cybersickness Mitigation in Virtual Reality
+                        <!-- TODO: DOI가 나오면 아래처럼 링크로 감싸주세요:
+                             <a href="https://doi.org/..." target="_blank" rel="noopener">제목</a> -->
+                        Fading the Periphery: Peripheral Brightness Rolloff for Cybersickness Mitigation in VR
                     </h2>
-                    <p class="pub-authors">Uijong Ju, <strong>Kyuewon Kim</strong></p>
-                    <button class="abstract-toggle" onclick="toggleAbstract(this)">
-                        <span class="abstract-arrow">›</span> Abstract
-                    </button>
-                    <div class="abstract-body">
-                        <!-- TODO: 실제 abstract로 교체해주세요 -->
-                        This paper proposes a peripheral brightness reduction method to mitigate cybersickness in virtual reality, with effectiveness validated through user studies measuring sickness symptoms and task performance.
-                    </div>
-                    <div class="pub-links">
-                        <!-- <a href="#" class="btn-link">PDF</a> -->
-                        <!-- <a href="#" class="btn-link">DOI</a> -->
-                    </div>
+                    <p class="pub-authors"><strong>Kyuewon Kim</strong>, Uijong Ju</p>
+                    <p class="pub-venue">IEEE VR 2027 (IEEE Transactions on Visualization and Computer Graphics)</p>
                 </div>
             </div>
 
@@ -609,24 +132,15 @@
                 <img src="./images/Paper-1.png" alt="Paper 2 thumbnail" class="pub-thumb">
                 <div>
                     <div class="pub-badges">
-                        <span class="badge badge-venue">Displays</span>
+                        <span class="badge badge-venue">Journal</span>
                         <span class="badge badge-year">2026</span>
+                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0141938226000569" target="_blank" rel="noopener" class="btn-link btn-link-sm">DOI</a>
                     </div>
                     <h2 class="pub-title">
                         Functional connectivity correlates of subjective visual fatigue induced by visual content manipulation: A whole-brain fMRI study
                     </h2>
-                    <p class="pub-authors"><strong>Kyuewon Kim</strong>, Uijong Ju</p>
-                    <button class="abstract-toggle" onclick="toggleAbstract(this)">
-                        <span class="abstract-arrow">›</span> Abstract
-                    </button>
-                    <div class="abstract-body">
-                        <!-- TODO: 실제 abstract로 교체해주세요 -->
-                        This study investigates neural correlates of subjective visual fatigue using whole-brain fMRI, examining functional connectivity changes induced by visual content manipulation.
-                    </div>
-                    <div class="pub-links">
-                        <!-- <a href="#" class="btn-link">PDF</a> -->
-                        <!-- <a href="#" class="btn-link">DOI</a> -->
-                    </div>
+                    <p class="pub-authors"><strong>Uijong Ju</strong>, Kyuewon Kim</p>
+                    <p class="pub-venue">Displays</p>
                 </div>
             </div>
 
@@ -666,12 +180,25 @@
 </footer>
 
 <script>
-    function toggleAbstract(btn) {
-        const body = btn.nextElementSibling;
-        const isOpen = body.classList.contains('open');
-        body.classList.toggle('open', !isOpen);
-        btn.classList.toggle('open', !isOpen);
-    }
+    const emailBtn = document.getElementById('emailBtn');
+    const emailPop = document.getElementById('emailPop');
+    const emailCopy = document.getElementById('emailCopy');
+
+    emailBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        emailPop.classList.toggle('open');
+    });
+
+    emailCopy.addEventListener('click', () => {
+        navigator.clipboard.writeText('kyuewonkim@khu.ac.kr').then(() => {
+            emailCopy.textContent = 'Copied!';
+            setTimeout(() => { emailCopy.textContent = 'Copy'; }, 1500);
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!emailPop.contains(e.target)) emailPop.classList.remove('open');
+    });
 
     document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.addEventListener('click', () => {
