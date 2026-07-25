@@ -37,6 +37,13 @@
     <section id="projects">
         <p class="section-label">Projects</p>
 
+        <div class="filter-tabs" id="yearFilter">
+            <button class="filter-tab active" data-year="all">All</button>
+            <button class="filter-tab" data-year="2024">2024</button>
+            <button class="filter-tab" data-year="2025">2025</button>
+            <button class="filter-tab" data-year="2026">2026</button>
+        </div>
+
         <div class="pub-list">
 
             <!-- TODO: 아래는 예시 카드입니다. 실제 프로젝트로 교체해주세요.
@@ -44,7 +51,7 @@
                  <img src="./images/프로젝트이미지.png" alt="..." class="pub-thumb"> 로 바꾸면 됩니다. -->
 
             <!-- Project 1 (예시) -->
-            <div class="pub-card">
+            <div class="pub-card" data-year="2026">
                 <div class="pub-thumb-placeholder">Thumbnail</div>
                 <div>
                     <div class="pub-badges">
@@ -53,7 +60,27 @@
                     </div>
                     <h2 class="pub-title">[Project Name]</h2>
                     <p class="pub-desc">
-                        [A short description of the project: what you built, which technologies you used, and why.]
+                        [A short description of the project.]
+                    </p>
+                    <!-- 임시 숨김: style="display:none" 제거하면 다시 표시됨 -->
+                    <div class="pub-links" style="display: none;">
+                        <a href="#" class="btn-link">GitHub</a>
+                        <a href="#" class="btn-link">Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 1-2 (예시) -->
+            <div class="pub-card" data-year="2026">
+                <div class="pub-thumb-placeholder">Thumbnail</div>
+                <div>
+                    <div class="pub-badges">
+                        <span class="badge badge-venue">Side Project</span>
+                        <span class="badge badge-year">2026</span>
+                    </div>
+                    <h2 class="pub-title">[Project Name]</h2>
+                    <p class="pub-desc">
+                        [A short description of the project.]
                     </p>
                     <!-- 임시 숨김: style="display:none" 제거하면 다시 표시됨 -->
                     <div class="pub-links" style="display: none;">
@@ -64,7 +91,27 @@
             </div>
 
             <!-- Project 2 (예시) -->
-            <div class="pub-card">
+            <div class="pub-card" data-year="2025">
+                <div class="pub-thumb-placeholder">Thumbnail</div>
+                <div>
+                    <div class="pub-badges">
+                        <span class="badge badge-venue">Side Project</span>
+                        <span class="badge badge-year">2025</span>
+                    </div>
+                    <h2 class="pub-title">[Project Name]</h2>
+                    <p class="pub-desc">
+                        [A short description of the project.]
+                    </p>
+                    <!-- 임시 숨김: style="display:none" 제거하면 다시 표시됨 -->
+                    <div class="pub-links" style="display: none;">
+                        <a href="#" class="btn-link">GitHub</a>
+                        <a href="#" class="btn-link">Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2-2 (예시) -->
+            <div class="pub-card" data-year="2025">
                 <div class="pub-thumb-placeholder">Thumbnail</div>
                 <div>
                     <div class="pub-badges">
@@ -84,7 +131,27 @@
             </div>
 
             <!-- Project 3 (예시) -->
-            <div class="pub-card">
+            <div class="pub-card" data-year="2024">
+                <div class="pub-thumb-placeholder">Thumbnail</div>
+                <div>
+                    <div class="pub-badges">
+                        <span class="badge badge-venue">Side Project</span>
+                        <span class="badge badge-year">2024</span>
+                    </div>
+                    <h2 class="pub-title">[Project Name]</h2>
+                    <p class="pub-desc">
+                        [A short description of the project.]
+                    </p>
+                    <!-- 임시 숨김: style="display:none" 제거하면 다시 표시됨 -->
+                    <div class="pub-links" style="display: none;">
+                        <a href="#" class="btn-link">GitHub</a>
+                        <a href="#" class="btn-link">Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3-2 (예시) -->
+            <div class="pub-card" data-year="2024">
                 <div class="pub-thumb-placeholder">Thumbnail</div>
                 <div>
                     <div class="pub-badges">
@@ -111,6 +178,19 @@
 <footer>
     <p>&copy; 2026 Kyuewon Kim. All rights reserved.</p>
 </footer>
+
+<script>
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const year = tab.dataset.year;
+            document.querySelectorAll('.pub-card').forEach(card => {
+                card.dataset.hidden = (year !== 'all' && card.dataset.year !== year) ? 'true' : 'false';
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

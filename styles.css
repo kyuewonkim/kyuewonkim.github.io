@@ -473,7 +473,7 @@ section:last-of-type { border-bottom: none; }
 
 .hobby-card {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 380px 1fr;
     gap: 28px;
     align-items: start;
     padding: 28px 0;
@@ -484,8 +484,11 @@ section:last-of-type { border-bottom: none; }
 .hobby-card:last-child { border-bottom: none; }
 
 /* 사진 한 장씩 가로 스와이프 (다음 장이 살짝 보여서 넘길 수 있음을 암시) */
+.photo-frame { position: relative; }
+
 .hobby-photos {
     display: flex;
+    align-items: flex-start;
     gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -495,11 +498,43 @@ section:last-of-type { border-bottom: none; }
 
 .hobby-photos::-webkit-scrollbar { display: none; }
 
+/* 좌우 넘김 화살표 */
+.photo-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-mid);
+    background: rgba(255, 255, 255, 0.92);
+    color: #374151;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.18);
+    opacity: 0.9;
+    transition: opacity 0.15s, background 0.15s;
+}
+
+.photo-nav:hover { opacity: 1; background: #fff; }
+.photo-nav.prev { left: 8px; }
+.photo-nav.next { right: 8px; }
+.photo-nav[hidden] { display: none; }
+
 .hobby-photo {
-    flex: 0 0 calc(100% - 34px);
+    flex: 0 0 calc(50% - 5px);
+    width: calc(50% - 5px);
     scroll-snap-align: start;
     aspect-ratio: 3 / 4;
+    height: auto;
+    min-height: 0;
     object-fit: cover;
+    display: block;
     border-radius: 10px;
     border: 1px solid var(--border-mid);
 }

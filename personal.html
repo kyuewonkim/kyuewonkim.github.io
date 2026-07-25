@@ -61,8 +61,10 @@
 
             <div class="hobby-card">
                 <div class="hobby-photos">
-                    <div class="hobby-photo photo-placeholder">Photo</div>
-                    <div class="hobby-photo photo-placeholder">Photo</div>
+                    <img src="./images/personal/ces-1.jpeg" alt="CES 2026 in Las Vegas" class="hobby-photo">
+                    <img src="./images/personal/ces-2.jpeg" alt="CES 2026 in Las Vegas" class="hobby-photo">
+                    <img src="./images/personal/ces-3.jpeg" alt="CES 2026 in Las Vegas" class="hobby-photo">
+                    <img src="./images/personal/ces-4.jpeg" alt="CES 2026 in Las Vegas" class="hobby-photo">
                 </div>
                 <div>
                     <h2 class="pub-title">Las Vegas 🇺🇸</h2>
@@ -119,6 +121,51 @@
 <footer>
     <p>&copy; 2026 Kyuewon Kim. All rights reserved.</p>
 </footer>
+
+<script>
+    // 사진 갤러리: 좌우 화살표 버튼으로 넘기기 (트랙패드/터치 스와이프도 계속 지원)
+    document.querySelectorAll('.hobby-photos').forEach(track => {
+        // 실제 사진(img)이 들어있고, 넘길 내용이 있을 때만 화살표 표시 (빈 placeholder 카드는 제외)
+        if (!track.querySelector('img.hobby-photo')) return;
+        if (track.scrollWidth <= track.clientWidth + 4) return;
+
+        const frame = document.createElement('div');
+        frame.className = 'photo-frame';
+        track.parentNode.insertBefore(frame, track);
+        frame.appendChild(track);
+
+        const prev = document.createElement('button');
+        prev.type = 'button';
+        prev.className = 'photo-nav prev';
+        prev.setAttribute('aria-label', '이전 사진');
+        prev.innerHTML = '‹';
+
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.className = 'photo-nav next';
+        next.setAttribute('aria-label', '다음 사진');
+        next.innerHTML = '›';
+
+        frame.append(prev, next);
+
+        const step = () => {
+            const photo = track.querySelector('.hobby-photo');
+            // 한 번에 한 장씩 넘기기 (사진폭 + 간격)
+            return photo ? photo.offsetWidth + 10 : track.clientWidth;
+        };
+
+        prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+        next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+        const update = () => {
+            prev.hidden = track.scrollLeft <= 2;
+            next.hidden = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        };
+        track.addEventListener('scroll', update);
+        window.addEventListener('resize', update);
+        update();
+    });
+</script>
 
 </body>
 </html>
