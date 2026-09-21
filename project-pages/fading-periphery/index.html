@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyuewon Kim</title>
+    <title>Fading the Periphery — Project Page</title>
     <meta name="description" content="Kyuewon Kim">
     <meta name="robots" content="noindex, nofollow, noarchive">
 
@@ -42,17 +42,10 @@
             line-height: 1.8;
         }
 
-        /* 임시 숨김: 이 블록과 안내문을 제거하고 title/description을 복원하면 다시 표시됨 */
-        body > :not(.temporary-unavailable) { display: none !important; }
 
-        .temporary-unavailable {
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            padding: 24px;
-            color: var(--muted);
-            text-align: center;
-        }
+        a, a:hover { text-decoration: none; }
+        a { transition: color .18s ease, opacity .18s ease; }
+        a:hover { color: var(--accent); }
 
         ::selection { background: rgba(125, 211, 252, 0.25); }
 
@@ -118,8 +111,8 @@
         }
 
         .hero-authors { font-size: 0.95rem; margin-bottom: 6px; }
-        .hero-authors a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
-        .hero-authors a:hover { color: var(--accent); border-color: var(--accent); }
+        .hero-authors a { color: var(--text); text-decoration: none; }
+        .hero-authors a:hover { color: var(--accent); }
 
         .hero-affil { font-size: 0.82rem; color: var(--muted); margin-bottom: 34px; }
 
@@ -270,12 +263,11 @@
 
 <body>
 
-<main class="temporary-unavailable" role="status">
-    <p>This page is temporarily unavailable.</p>
-</main>
+
 
 <!-- ── HERO ── -->
 <header class="hero">
+    <a href="../../publications.html" style="position:absolute;top:24px;left:28px;color:var(--muted);font-size:14px;z-index:2;">← All publications</a>
     <span class="hero-venue">IEEE VR 2027</span>
     <h1>Fading the Periphery: Peripheral Brightness Rolloff for Cybersickness Mitigation in VR</h1>
     <p class="hero-authors">
@@ -284,10 +276,6 @@
     </p>
     <p class="hero-affil">HXR Lab, Kyung Hee University</p>
     <div class="hero-links">
-        <!-- TODO: 링크가 준비되면 href의 #을 교체하고 style="display:none"을 제거하세요 -->
-        <a href="#" class="btn btn-primary" style="display: none;">📄 Paper</a>
-        <a href="#" class="btn" style="display: none;">DOI</a>
-        <a href="#video" class="btn">🎬 Video</a>
         <a href="#bibtex" class="btn">BibTeX</a>
     </div>
     <div class="scroll-hint">SCROLL ↓</div>
@@ -302,49 +290,25 @@
     </section>
 
     <!-- ── ABSTRACT ── -->
-    <section id="abstract">
-        <h2 class="sec-title">Abstract</h2>
-        <!-- TODO: 실제 abstract로 교체해주세요 -->
-        <p class="abstract-text">
-            [This paper proposes a peripheral brightness rolloff method to mitigate cybersickness in virtual reality, validated through user studies measuring sickness symptoms and task performance.]
-        </p>
-    </section>
+
 
     <!-- ── METHOD / RESULTS ── -->
-    <section id="figures">
-        <h2 class="sec-title">Method &amp; Results</h2>
 
-        <div class="figure-block">
-            <!-- TODO: 그림으로 교체 -->
-            <div class="media-box figure">Figure 1</div>
-            <p class="media-caption">[그림 1 설명]</p>
-        </div>
-
-        <div class="figure-block">
-            <div class="media-box figure">Figure 2</div>
-            <p class="media-caption">[그림 2 설명]</p>
-        </div>
-    </section>
 
     <!-- ── VIDEO ── -->
-    <section id="video">
-        <h2 class="sec-title">Video</h2>
-        <!-- TODO: 유튜브 영상이 준비되면 media-box를 아래로 교체하세요:
-             <iframe class="video-frame" src="https://www.youtube.com/embed/영상ID" title="Video" allowfullscreen></iframe> -->
-        <div class="media-box video">Video — Coming Soon</div>
-    </section>
+
 
     <!-- ── BIBTEX ── -->
     <section id="bibtex">
         <h2 class="sec-title">BibTeX</h2>
         <div class="bibtex-box">
             <button type="button" class="copy-btn" onclick="copyBibtex(this)">Copy</button>
-<pre id="bibtexText">@article{kim2027fading,
+<pre id="bibtexText">@unpublished{kim2026fading,
   title   = {Fading the Periphery: Peripheral Brightness Rolloff
              for Cybersickness Mitigation in VR},
   author  = {Kim, Kyuewon and Ju, Uijong},
-  journal = {IEEE Transactions on Visualization and Computer Graphics},
-  year    = {2027}
+  note    = {Manuscript submitted to IEEE VR 2027},
+  year    = {2026}
 }</pre>
         </div>
     </section>
@@ -352,7 +316,7 @@
 </div>
 
 <footer>
-    <p><a href="https://kyuewonkim.github.io">Kyuewon Kim</a> · Human-Centered eXtended Reality(HXR) Lab, Kyung Hee University</p>
+    <p><a href="https://kyuewonkim.github.io">Kyuewon Kim</a> · Human-centered eXtended Reality (HXR) Lab, Kyung Hee University</p>
 </footer>
 
 <script>
@@ -361,6 +325,8 @@
         navigator.clipboard.writeText(text).then(() => {
             btn.textContent = 'Copied!';
             setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+        }).catch(() => {
+            btn.textContent = 'Select text to copy';
         });
     }
 </script>
