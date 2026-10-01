@@ -1335,3 +1335,5 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 .study-figure figcaption {
   font-weight: 300;
 }
+
+.paper-status { color: var(--link-accent); }
