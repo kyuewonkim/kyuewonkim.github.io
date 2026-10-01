@@ -1311,7 +1311,7 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 
 .project-title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
 .projects-listing .project-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-.projects-listing .project-description { margin-top: 8px; line-height: 1.6; }
+.projects-listing .project-description { margin-top: 8px; color: #000; line-height: 1.6; }
 .project-keywords { display: flex; flex-wrap: wrap; gap: 4px 10px; list-style: none; margin: 10px 0 0; padding: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .project-keywords li { display: inline-flex; align-items: baseline; gap: 10px; }
 .project-keywords li + li::before { content: "·"; }
