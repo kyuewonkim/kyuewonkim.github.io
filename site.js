@@ -1,26 +1,18 @@
-const yearFilter = document.getElementById('year-filter');
-if (yearFilter) {
-  const typeButtons = [...document.querySelectorAll('[data-publication-type]')];
-  const groups = [...document.querySelectorAll('.year-group[data-year]')];
+const typeButtons = [...document.querySelectorAll('[data-publication-type]')];
+if (typeButtons.length) {
+  const papers = [...document.querySelectorAll('.publication-list .publication-row')];
   const empty = document.querySelector('.publication-empty');
   let selectedType = 'all';
   const filterPublications = () => {
     let visibleCount = 0;
-    groups.forEach(group => {
-      const matchesYear = yearFilter.value === 'all' || group.dataset.year === yearFilter.value;
-      let groupCount = 0;
-      group.querySelectorAll('.publication-row').forEach(paper => {
-        const visible = matchesYear && (selectedType === 'all' || paper.dataset.type === selectedType);
-        paper.hidden = !visible;
-        if (visible) groupCount++;
-      });
-      group.hidden = groupCount === 0;
-      visibleCount += groupCount;
+    papers.forEach(paper => {
+      const visible = selectedType === 'all' || paper.dataset.type === selectedType;
+      paper.hidden = !visible;
+      if (visible) visibleCount++;
     });
     if (empty) empty.hidden = visibleCount > 0;
     typeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.publicationType === selectedType)));
   };
-  yearFilter.addEventListener('change', filterPublications);
   typeButtons.forEach(button => button.addEventListener('click', () => {
     selectedType = button.dataset.publicationType;
     filterPublications();
@@ -81,19 +73,6 @@ if (viewer) {
 const newsList = document.querySelector('.news-list');
 if (newsList) {
   const newsRows = [...newsList.querySelectorAll(':scope > .news-row')];
-  const latestNews = newsRows.reduce((latest, row) => {
-    const date = Date.parse(row.querySelector('time[datetime]')?.dateTime || '');
-    return Number.isFinite(date) && (!latest || date > latest.date) ? { row, date } : latest;
-  }, null);
-  const latestTitle = latestNews?.row.querySelector('.news-copy h3');
-  if (latestTitle) {
-    const badge = document.createElement('span');
-    badge.className = 'news-new-badge';
-    badge.textContent = 'NEW';
-    badge.setAttribute('aria-label', 'Latest news');
-    latestTitle.append(' ', badge);
-  }
-
   const sizeNewsList = () => {
     const scrollable = newsRows.length > 5;
     if (scrollable) {
@@ -108,4 +87,59 @@ if (newsList) {
   sizeNewsList();
   const newsResizeObserver = new ResizeObserver(sizeNewsList);
   newsRows.forEach(row => newsResizeObserver.observe(row));
+}
+
+const emailButton = document.getElementById('name-email-button');
+const emailDialog = document.getElementById('email-dialog');
+const emailClose = document.getElementById('email-close');
+if (emailButton && emailDialog && emailClose) {
+  emailButton.addEventListener('click', () => emailDialog.showModal());
+  emailClose.addEventListener('click', () => emailDialog.close());
+  emailDialog.addEventListener('click', event => {
+    if (event.target === emailDialog) emailDialog.close();
+  });
+  emailDialog.addEventListener('close', () => emailButton.focus());
+}
+
+const projectGallery = document.querySelector('.project-gallery');
+if (projectGallery) {
+  const figure = projectGallery.querySelector('.project-gallery-image');
+  const status = projectGallery.querySelector('.project-gallery-status');
+  const slides = [
+    { box: '0 0 1280 720', label: 'Complete study figure' },
+    { box: '0 0 873 720', label: 'Video stimuli' },
+    { box: '873 0 407 720', label: 'Brain connectivity' }
+  ];
+  let current = 0;
+  const changeFigure = step => {
+    current = (current + step + slides.length) % slides.length;
+    figure.setAttribute('viewBox', slides[current].box);
+    figure.setAttribute('aria-label', slides[current].label);
+    status.textContent = slides[current].label;
+  };
+  projectGallery.querySelector('.project-gallery-prev').addEventListener('click', () => changeFigure(-1));
+  projectGallery.querySelector('.project-gallery-next').addEventListener('click', () => changeFigure(1));
+}
+
+const copyEmail = document.getElementById('copy-email');
+const copyEmailStatus = document.getElementById('copy-email-status');
+if (copyEmail && copyEmailStatus) {
+  let copyStatusTimeout;
+  copyEmail.addEventListener('click', async () => {
+    clearTimeout(copyStatusTimeout);
+    try {
+      await navigator.clipboard.writeText(copyEmail.dataset.email);
+      copyEmail.textContent = 'Copied!';
+      copyEmail.setAttribute('aria-label', 'Email address copied');
+      copyEmailStatus.textContent = '';
+    } catch {
+      copyEmail.textContent = 'Copy';
+      copyEmailStatus.textContent = 'Select the address to copy.';
+    }
+    copyStatusTimeout = setTimeout(() => {
+      copyEmail.textContent = 'Copy';
+      copyEmail.setAttribute('aria-label', 'Copy email address');
+      copyEmailStatus.textContent = '';
+    }, 3000);
+  });
 }
