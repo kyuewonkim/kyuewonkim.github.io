@@ -1200,13 +1200,14 @@ body.viewer-open {
 .news-gallery > a > .news-gallery-detail { width: 100%; height: 100%; overflow: hidden; }
 .news-gallery > a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-/* Plain dates sit close to the timeline stem and dot. */
+/* Plain dates and update text without timeline decorations. */
 .news .news-row { align-items: stretch; }
-.news .news-copy { border-left: 1px solid var(--line); padding-left: 28px; padding-bottom: 24px; }
+.news .news-copy { border-left: 0; padding-left: 0; padding-bottom: 24px; }
 .news .news-row:last-child .news-copy { padding-bottom: 0; }
-.news .news-copy::before { content: ""; }
+.news .news-copy::before { content: none; }
 .news .news-date { align-items: flex-start; padding-top: 3px; }
 .news .news-date time {
+  text-transform: none;
   display: inline-block;
   padding: 0;
   border-radius: 0;
@@ -1222,7 +1223,7 @@ body.viewer-open {
 @media (max-width: 580px) {
   .news .news-text-only { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; }
   .news .news-date time { font-size: 13px; }
-  .news .news-copy { padding-left: 18px; }
+  .news .news-copy { padding-left: 0; }
 }
 
 /* Keep project descriptions free of link underlines on hover. */
