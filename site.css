@@ -1218,9 +1218,9 @@ body.viewer-open {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.news .news-text-only { grid-template-columns: max-content minmax(0, 1fr); gap: 18px; }
+.news .news-text-only { grid-template-columns: 120px minmax(0, 1fr); gap: 18px; }
 @media (max-width: 580px) {
-  .news .news-text-only { gap: 14px; }
+  .news .news-text-only { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; }
   .news .news-date time { font-size: 13px; }
   .news .news-copy { padding-left: 18px; }
 }
