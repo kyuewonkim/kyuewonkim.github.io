@@ -1243,7 +1243,7 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 .venue-name { color: #434750; font-weight: 400; font-style: italic; font-synthesis: style; }
 
 /* Make the lab homepage link visible within the biography. */
-.about-copy .lab-link { color: var(--link-accent); text-decoration: underline; text-underline-offset: 3px; }
+.about-copy .lab-link, .about-copy .advisor-link { color: var(--link-accent); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Compact profile actions beside the name. */
 .about-name-row { position: relative; display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px 20px; margin: 28px 0 22px; }
@@ -1314,7 +1314,6 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 .project-keywords li { display: inline-flex; align-items: baseline; gap: 10px; }
 .project-keywords li + li::before { content: "·"; }
 
-.about-copy .affiliation + .affiliation { margin-top: 16px; }
 
 .portrait-column { min-width: 0; }
 .portrait-column > .eyebrow { margin-bottom: 16px; }
