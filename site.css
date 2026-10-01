@@ -1319,3 +1319,5 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 .portrait-column > .eyebrow { margin-bottom: 16px; }
 
 .about-copy .affiliation + .affiliation { margin-top: 16px; }
+
+.news .news-copy p { font-weight: 300; }
