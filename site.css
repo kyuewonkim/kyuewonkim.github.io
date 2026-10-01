@@ -22,6 +22,7 @@ html {
 }
 
 body {
+  font-weight: 300;
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
@@ -55,7 +56,7 @@ h1,h2,h3,p,figure {
 }
 
 h1,h2,h3 {
-  font-weight: 400;
+  font-weight: 300;
 }
 
 button,select {
@@ -104,7 +105,7 @@ button,select {
 
 .site-header nav a[aria-current=page] {
   color: var(--link-accent);
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .hero {
@@ -176,7 +177,7 @@ button,select {
 .eyebrow {
   text-transform: uppercase;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: .24em;
   color: var(--muted);
 }
@@ -344,7 +345,7 @@ button,select {
 }
 
 .authors strong {
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .venue {
@@ -1159,7 +1160,7 @@ body.viewer-open {
 .sample-label {
   display: inline-block;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 300;
   color: var(--muted);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -1214,7 +1215,7 @@ body.viewer-open {
   background: transparent;
   color: #6b7280;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1240,7 +1241,7 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 }
 
 /* Give journal and conference names matching typographic emphasis. */
-.venue-name { color: #434750; font-weight: 400; font-style: italic; font-synthesis: style; }
+.venue-name { color: #434750; font-weight: 300; font-style: italic; font-synthesis: style; }
 
 /* Make the lab homepage link visible within the biography. */
 .about-copy .lab-link, .about-copy .advisor-link { color: var(--link-accent); text-decoration: underline; text-underline-offset: 3px; }
@@ -1256,7 +1257,7 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 .contact-dialog::backdrop { background: rgb(0 0 0 / 28%); }
 .contact-dialog-panel { padding: 24px; }
 .contact-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.contact-dialog-heading h2 { font-size: 20px; font-weight: 500; }
+.contact-dialog-heading h2 { font-size: 20px; font-weight: 300; }
 .contact-dialog-close { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--muted); font-size: 28px; line-height: 1; cursor: pointer; }
 .contact-dialog-close:hover { color: var(--ink); background: #f3f5f7; }
 .email-address { margin-top: 16px; font-size: 18px; overflow-wrap: anywhere; user-select: all; }
