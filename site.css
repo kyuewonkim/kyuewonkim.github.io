@@ -1320,4 +1320,16 @@ a.figure-preview:hover, .study-figure > a:hover { opacity: .82; }
 
 .about-copy .affiliation + .affiliation { margin-top: 16px; }
 
-.news .news-copy p { font-weight: 300; }
+/* Use one light weight for body copy across the main pages and details. */
+.about-copy .affiliation,
+.news .news-copy p,
+.authors,
+.venue,
+.venue-name,
+.publication-empty,
+.project-row p,
+.project-keywords,
+.detail-section p,
+.study-figure figcaption {
+  font-weight: 300;
+}
