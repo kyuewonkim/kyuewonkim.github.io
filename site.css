@@ -22,10 +22,19 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   font-weight: 300;
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
+}
+
+body > main {
+  flex: 1 0 auto;
+  margin-block: 0;
 }
 
 a {
@@ -82,7 +91,8 @@ button,select {
 
 .site-header {
   max-width: 1440px;
-  margin: auto;
+  margin: 0 auto;
+  flex-shrink: 0;
   padding: 32px 5.2%;
   display: flex;
   align-items: center;
@@ -278,7 +288,8 @@ button,select {
 
 .site-footer {
   width: min(1120px,89.6%);
-  margin: auto;
+  margin: 0 auto;
+  flex-shrink: 0;
   border-top: 1px solid var(--line);
   padding: 28px 0 36px;
   display: flex;
